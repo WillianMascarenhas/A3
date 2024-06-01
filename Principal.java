@@ -61,6 +61,11 @@ public class Principal {
     }
 
     private static void cadastrarFuncionario(Scanner scanner) {
+        System.out.println("Tipo de funcionário a cadastrar:");
+        System.out.println("1. Funcionário");
+        System.out.println("2. Gerente");
+        int tipo = scanner.nextInt();
+    
         System.out.print("Nome: ");
         String nome = scanner.next();
         System.out.print("ID: ");
@@ -71,11 +76,24 @@ public class Principal {
         double salario = scanner.nextDouble();
         System.out.print("Data de Admissão: ");
         String dataAdmissao = scanner.next();
-
-        Funcionario novoFuncionario = new Funcionario(nome, id, departamento, salario, dataAdmissao);
-        funcionarios.add(novoFuncionario);
-        System.out.println("Funcionário cadastrado com sucesso!");
+    
+        if (tipo == 1) {
+            Funcionario novoFuncionario = new Funcionario(nome, id, departamento, salario, dataAdmissao);
+            funcionarios.add(novoFuncionario);
+            System.out.println("Funcionário cadastrado com sucesso!");
+        } else if (tipo == 2) {
+            System.out.print("Setor: ");
+            String setor = scanner.next();
+            System.out.print("Bônus: ");
+            double bonus = scanner.nextDouble();
+            Gerente novoGerente = new Gerente(nome, id, departamento, salario, dataAdmissao, setor, bonus);
+            funcionarios.add(novoGerente);
+            System.out.println("Gerente cadastrado com sucesso!");
+        } else {
+            System.out.println("Tipo inválido!");
+        }
     }
+    
 
     private static void listarFuncionarios(Scanner scanner) {
         System.out.println("Escolha o critério de ordenação:");
@@ -83,7 +101,7 @@ public class Principal {
         System.out.println("2. Nome");
         System.out.println("3. Departamento");
         int criterio = scanner.nextInt();
-
+    
         switch (criterio) {
             case 1:
                 funcionarios.sort(Comparator.comparingInt(Funcionario::getId));
@@ -98,18 +116,19 @@ public class Principal {
                 System.out.println("Critério inválido!");
                 return;
         }
-
+    
         System.out.println("Funcionários:");
         for (int i = 0; i < funcionarios.size(); i++) {
             Funcionario f = funcionarios.get(i);
             System.out.println(f);
         }
     }
+    
 
     private static void buscarFuncionario(Scanner scanner) {
         System.out.print("Digite o ID do funcionário: ");
         int id = scanner.nextInt();
-
+    
         for (int i = 0; i < funcionarios.size(); i++) {
             Funcionario f = funcionarios.get(i);
             if (f.getId() == id) {
@@ -119,16 +138,21 @@ public class Principal {
                 System.out.println("Departamento: " + f.getDepartamento());
                 System.out.println("Salário: " + f.getSalario());
                 System.out.println("Data de Admissão: " + f.getDataAdmissao());
+                if (f instanceof Gerente) {
+                    Gerente g = (Gerente) f;
+                    System.out.println("Setor: " + g.getSetor());
+                    System.out.println("Bônus: " + g.getBonus());
+                }
                 return;
             }
         }
         System.out.println("Funcionário não encontrado.");
     }
-
+    
     private static void removerFuncionario(Scanner scanner) {
         System.out.print("Digite o ID do funcionário a ser removido: ");
         int id = scanner.nextInt();
-
+    
         Funcionario funcionarioARemover = null;
         for (int i = 0; i < funcionarios.size(); i++) {
             Funcionario f = funcionarios.get(i);
@@ -137,12 +161,12 @@ public class Principal {
                 break;
             }
         }
-
+    
         if (funcionarioARemover != null) {
             System.out.println("Funcionário encontrado: " + funcionarioARemover);
             System.out.print("Confirma a remoção? (s/n): ");
             String confirmacao = scanner.next();
-
+    
             if (confirmacao.equalsIgnoreCase("s")) {
                 funcionarios.remove(funcionarioARemover);
                 System.out.println("Funcionário removido com sucesso.");
@@ -153,11 +177,11 @@ public class Principal {
             System.out.println("Funcionário não encontrado.");
         }
     }
-
+    
     private static void modificarFuncionario(Scanner scanner) {
         System.out.print("Digite o ID do funcionário a ser modificado: ");
         int id = scanner.nextInt();
-
+    
         for (int i = 0; i < funcionarios.size(); i++) {
             Funcionario f = funcionarios.get(i);
             if (f.getId() == id) {
@@ -170,16 +194,27 @@ public class Principal {
                 double salario = scanner.nextDouble();
                 System.out.print("Nova Data de Admissão: ");
                 String dataAdmissao = scanner.next();
-
+    
                 f.setNome(nome);
                 f.setDepartamento(departamento);
                 f.setSalario(salario);
                 f.setDataAdmissao(dataAdmissao);
-
+    
+                if (f instanceof Gerente) {
+                    Gerente g = (Gerente) f;
+                    System.out.print("Novo Setor: ");
+                    String setor = scanner.next();
+                    System.out.print("Novo Bônus: ");
+                    double bonus = scanner.nextDouble();
+                    g.setSetor(setor);
+                    g.setBonus(bonus);
+                }
+    
                 System.out.println("Funcionário modificado com sucesso.");
                 return;
             }
         }
         System.out.println("Funcionário não encontrado.");
     }
+    
 }
