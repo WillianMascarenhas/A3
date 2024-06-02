@@ -1,8 +1,8 @@
 ## Integrantes:
-Willian Almeida Mascarenhas - 12723214459
-Cláudio Luis Oliveira Queiroz - 12724161236
-João Pedro Carneiro pitanga - 12724134996
-Victoria - 12724115672
+1. Willian Almeida Mascarenhas - 12723214459
+2. Cláudio Luis Oliveira Queiroz - 12724161236
+3. João Pedro Carneiro pitanga - 12724134996
+4. Victoria - 12724115672
 
 # Sistema de Gerenciamento de Funcionários
 
