@@ -1,3 +1,9 @@
+## Integrantes:
+Willian Almeida Mascarenhas - 12723214459
+Cláudio Luis Oliveira Queiroz - 12724161236
+João Pedro Carneiro pitanga - 12724134996
+Victoria - 12724115672
+
 # Sistema de Gerenciamento de Funcionários
 
 Este projeto é um sistema simples de gerenciamento de funcionários, desenvolvido em Java. Ele permite cadastrar, listar, buscar, remover e modificar funcionários e gerentes. Os gerentes têm atributos adicionais como setor e bônus.
